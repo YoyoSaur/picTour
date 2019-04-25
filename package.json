@@ -1,0 +1,17 @@
+{
+  "name": "pictour",
+  "version": "1.0.0",
+  "description": "backend application for picTour",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "geverett",
+  "license": "ISC",
+  "dependencies": {
+    "convict": "^4.4.1",
+    "express": "^4.16.4",
+    "express-asyncify": "^1.0.0",
+    "mongoose": "^5.4.18"
+  }
+}
