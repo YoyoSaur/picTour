@@ -12,6 +12,7 @@
     "convict": "^4.4.1",
     "express": "^4.16.4",
     "express-asyncify": "^1.0.0",
+    "lodash": "^4.17.11",
     "mongoose": "^5.4.18"
   }
 }

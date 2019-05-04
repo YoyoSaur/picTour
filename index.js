@@ -1,8 +1,12 @@
-var express = require('express');
-var {Collection} = require('./db/index');
+const bodyParser = require('body-parser');
+const express = require('express');
+//const {Collection} = require('./db/index');
 
 var app = express();
+app.use(bodyParser.json());
+app.use(require('./router'));
+console.log('should be after');
 
-app.get('/collection/:collectionId', async (req, res) => {
-  Collection.findById(req.param.collectionId)
+app.listen(3000, () => {
+  console.log('listening on 300')
 });

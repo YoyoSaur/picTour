@@ -4,8 +4,10 @@
 
 var { db, mongoose } = require('../mongoClient');
 
+/**
+ * Basic piece owned by collection owners
+ */
 var piece = new mongoose.Schema({
-  piece_id: String,
   piece_name: String,
   address: {
     street: String,
@@ -14,7 +16,7 @@ var piece = new mongoose.Schema({
     country: String
   },
   collection_id: String,
-  owner: String,
+  owner_id: String,
   price: Number,
   date: Date
 });
