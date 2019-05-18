@@ -5,8 +5,7 @@ const express = require('express');
 var app = express();
 app.use(bodyParser.json());
 app.use(require('./router'));
-console.log('should be after');
 
 app.listen(3000, () => {
-  console.log('listening on 300')
+  console.log('listening on 3000')
 });

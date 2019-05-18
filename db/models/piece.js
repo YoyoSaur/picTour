@@ -16,12 +16,11 @@ var piece = new mongoose.Schema({
     country: String
   },
   collection_id: String,
-  owner_id: String,
+  owner_id: {type: String, index: true},
   price: Number,
   date: Date
 });
 
-piece.index({ owner: 1 })
 /* 
  * piece.get_collection: returns the collection_id
  */
