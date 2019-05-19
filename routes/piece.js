@@ -1,5 +1,6 @@
 const { Piece } = require('../db/index');
 const { piece_input } = require('../validation/piece');
+const { get_piece } = require('../schemas/piece')
 
 module.exports = [
   {
@@ -36,6 +37,7 @@ module.exports = [
       query: piece_input
     },
     middleware: [],
+    schema: get_piece,
     controller: async (req, res, next) => {
       console.log('in handler')
       let { piece_id } = req.query
