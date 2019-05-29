@@ -1,5 +1,5 @@
 const { Piece } = require('../db/index');
-const { piece_input } = require('../validation/piece');
+const { get_piece_input, get_piece_output } = require('../validation/piece');
 const { get_piece } = require('../schemas/piece')
 
 module.exports = [
@@ -34,7 +34,8 @@ module.exports = [
     method: 'get',
     path: '/piece',
     validation: {
-      query: piece_input
+      query: get_piece_input,
+      response: get_piece_output
     },
     middleware: [],
     schema: get_piece,
@@ -42,8 +43,9 @@ module.exports = [
       console.log('in handler')
       let { piece_id } = req.query
       Piece.findById(piece_id).then(
-        async (piece) => {
-          await res.json(piece)
+        (piece) => {
+          req.responseBody = piece
+          res.json(piece)
           next()
         },
         (err) => {
