@@ -1,3 +1,4 @@
+const { _, logger } = require('../required');
 const { Piece } = require('../db/index');
 const { get_piece_input, full_piece_output, create_piece_input } = require('../validation/piece');
 const { get_piece } = require('../schemas/piece')
@@ -26,11 +27,12 @@ module.exports = [
         owner_id,
         price,
         date: Date.now()
-      })
+      });
       piece.save();
-      console.log('Inserting into database', piece)
+      logger.info('Piece saved to database: ', piece);
+
       await res.json(piece);
-      next()
+      next();
     }
   },
   {
@@ -43,7 +45,6 @@ module.exports = [
     middleware: [],
     schema: get_piece,
     controller: async (req, res, next) => {
-      console.log('in handler')
       let { piece_id } = req.query
       Piece.findById(piece_id).then(
         (piece) => {
@@ -52,10 +53,41 @@ module.exports = [
           next()
         },
         (err) => {
-          console.log(err)
+          logger.error('Piece not found', req.query);
           res.status(404).json({ message: 'piece_not_found' });
           next()
         })
+    }
+  },
+  {
+    method: 'delete',
+    path: '/piece',
+    validation: {
+      query: get_piece_input,
+      response: full_piece_output
+    },
+    middleware: [],
+    schema: get_piece,
+    controller: async (req, res, next) => {
+      let { piece_id } = req.query
+      Piece.findByIdAndDelete(piece_id).then(
+        (piece) => {
+          if (piece === null) {
+            logger.error('Piece not found', req.query);
+            res.status(404).json({ message: 'piece_not_found' });
+            next()
+          } else {
+            req.responseBody = piece;
+            res.json(piece)
+            next()
+          }
+        },
+        (err) => {
+          logger.error('Datbase Error: ', err);
+          res.status(500).json({ message: 'database_error' });
+          next()
+        }
+      )
     }
   }
 ]

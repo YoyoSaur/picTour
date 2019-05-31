@@ -5,7 +5,6 @@
 var { db, mongoose } = require('../mongoClient');
 
 var owner = new mongoose.Schema({
-  owner_id: String,
   owner_first_name: String,
   owner_last_name: String,
   collection_ids: [String],
