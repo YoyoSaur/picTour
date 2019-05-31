@@ -1,10 +1,16 @@
 const joi = require('@hapi/joi');
 
+/**
+ * Input for GET /piece
+ */
 const get_piece_input = {
   piece_id: joi.string().required()
 }
 
-const get_piece_output = {
+/**
+ * Full output for base /piece
+ */
+const full_piece_output = {
     address: {
       street: joi.string().required(),
       postal_code: joi.number().integer().required(),
@@ -18,4 +24,20 @@ const get_piece_output = {
     price: joi.number().integer()
 }
 
-module.exports = { get_piece_input, get_piece_output }
+/**
+ * Input for POST /piece
+ */
+const create_piece_input = {
+    address: {
+      street: joi.string().required(),
+      postal_code: joi.number().integer().required(),
+      state: joi.string().required(),
+      country:joi.string().required() 
+    },
+    piece_name: joi.string().required(),
+    collection_id: joi.string().allow('null'),
+    owner_id: joi.string().allow('null'),
+    price: joi.number().integer()
+}
+
+module.exports = { get_piece_input, full_piece_output, create_piece_input }

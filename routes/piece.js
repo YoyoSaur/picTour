@@ -1,12 +1,15 @@
 const { Piece } = require('../db/index');
-const { get_piece_input, get_piece_output } = require('../validation/piece');
+const { get_piece_input, full_piece_output, create_piece_input } = require('../validation/piece');
 const { get_piece } = require('../schemas/piece')
 
 module.exports = [
   {
     method: 'post',
     path: '/piece',
-    validation: {},
+    validation: {
+      body: create_piece_input,
+      response: full_piece_output
+    },
     middleware: [],
     controller: async (req, res, next) => {
       let {
@@ -35,7 +38,7 @@ module.exports = [
     path: '/piece',
     validation: {
       query: get_piece_input,
-      response: get_piece_output
+      response: full_piece_output
     },
     middleware: [],
     schema: get_piece,
@@ -52,31 +55,6 @@ module.exports = [
           console.log(err)
           res.status(404).json({ message: 'piece_not_found' });
           next()
-        })
-    }
-  },
-  {
-    method: 'put',
-    path: '/piece',
-    validation: {},
-    middleware: [],
-    controller: async (req, res, next) => {
-      let {
-        piece_id,
-        piece_name,
-        address,
-        price
-      } = req.body;
-      Piece.findById(piece_id).then(
-        async (piece) => {
-          _.assign(piece, { piece_name, address, price })
-          piece.save()
-          await res.json(piece)
-          next()
-        },
-        async (err) => {
-          console.log(err)
-          await res.status(404).json({ message: 'piece_not_found' });
         })
     }
   }
