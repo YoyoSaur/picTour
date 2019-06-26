@@ -42,7 +42,6 @@ async function setupController(controller) {
   controller.path = await path();
   route = await whichRoute();
   let file_path = `routes/${route}.js`;
-  console.log(`Adding controller to route/${route}`);
   var read = fs.readFileSync(file_path, 'utf8');
   var splitted = read.split('\n]');
   splitted[1] = `,

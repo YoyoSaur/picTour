@@ -27,7 +27,6 @@ collection.methods.get_pieces = function () {
   return Piece.find({
     '_id': { $in: ids }
   }, (err, docs) => {
-    console.log(docs, err);
     return docs
   });
 }

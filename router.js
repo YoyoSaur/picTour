@@ -66,7 +66,6 @@ _.forEach(routes, (route) => {
   // if response validation 
   if(validation.response) {
     router[method](path, async(req, res, next) => {
-      console.log(req.responseBody)
       next()
     });
 
