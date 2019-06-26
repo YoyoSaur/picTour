@@ -12,10 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^15.0.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "convict": "^4.4.1",
     "express": "^4.17.1",
     "express-asyncify": "^1.0.0",
     "lodash": "^4.17.11",
+    "mocha": "^6.1.4",
     "mongoose": "^5.6.0",
     "winston": "^3.2.1"
   }
