@@ -4,7 +4,7 @@
   "description": "backend application for picTour",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/mocha --inspect -t 1000 --recursive",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },

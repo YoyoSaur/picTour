@@ -1,6 +1,6 @@
 const { _, logger } = require('../required');
 const { Owner } = require('../db/index');
-const { get_owner_input, full_owner_output, create_owner_input } = require('../validation/owner');
+const { get_owner_input, full_owner_output, create_owner_input, put_owner_input } = require('../validation/owner');
 const { get_owner } = require('../schemas/owner')
 
 module.exports = [
@@ -27,6 +27,35 @@ module.exports = [
         date: Date.now()
       });
       owner.save();
+      logger.info('Owner saved to database: ', owner);
+
+      await res.json(owner);
+      next();
+    }
+  },
+  {
+    method: 'put',
+    path: '/owner',
+    validation: {
+      body: put_owner_input,
+      response: full_owner_output
+    },
+    middleware: [],
+    controller: async (req, res, next) => {
+      let {
+        owner_id,
+        owner_first_name,
+        owner_last_name,
+        collection_ids,
+        piece_ids = []
+      } = req.body;
+      var owner = Owner.findByIdAndUpdate(owner_id, {
+        owner_first_name,
+        owner_last_name,
+        collection_ids,
+        piece_ids,
+        date: Date.now()
+      });
       logger.info('Owner saved to database: ', owner);
 
       await res.json(owner);

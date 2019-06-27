@@ -1,6 +1,6 @@
 const { _, logger } = require('../required');
 const { Piece } = require('../db/index');
-const { get_piece_input, full_piece_output, create_piece_input } = require('../validation/piece');
+const { get_piece_input, full_piece_output, create_piece_input, put_piece_input } = require('../validation/piece');
 const { get_piece } = require('../schemas/piece')
 
 module.exports = [
@@ -31,6 +31,36 @@ module.exports = [
       piece.save();
       logger.info('Piece saved to database: ', piece);
 
+      await res.json(piece);
+      next();
+    }
+  },
+  {
+    method: 'put',
+    path: '/piece',
+    validation: {
+      body: put_piece_input,
+      response: full_piece_output
+    },
+    middleware: [],
+    controller: async (req, res, next) => {
+      let {
+        piece_id,
+        piece_name,
+        address,
+        price,
+        collection_id = null,
+        owner_id = null,
+      } = req.body;
+      var piece = Piece.findByIdAndUpdate(piece_id, {
+        piece_name,
+        address,
+        price,
+        collection_id,
+        owner_id
+      });
+      logger.info('Piece saved to database: ', piece);
+      
       await res.json(piece);
       next();
     }

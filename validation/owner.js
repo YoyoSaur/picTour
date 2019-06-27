@@ -19,7 +19,7 @@ const full_owner_output = {
 }
 
 /**
- * Input for POST owner/
+ * input for post owner/
  */
 const create_owner_input = {
     owner_first_name: joi.string().required(),
@@ -28,4 +28,15 @@ const create_owner_input = {
     piece_ids: joi.array().items(joi.string())
 }
 
-module.exports = { get_owner_input, full_owner_output, create_owner_input }
+/**
+ * input for put owner/
+ */
+const put_owner_input = {
+    owner_id: joi.string().required(),
+    owner_first_name: joi.string().required(),
+    owner_last_name: joi.string().required(),
+    collection_ids: joi.array().items(joi.string()),
+    piece_ids: joi.array().items(joi.string())
+}
+
+module.exports = { get_owner_input, full_owner_output, create_owner_input, put_owner_input }

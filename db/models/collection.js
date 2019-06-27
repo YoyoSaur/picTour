@@ -7,7 +7,7 @@ const { Piece } = require('../index');
 
 var collection = new mongoose.Schema({
   collection_id: String,
-  place_name: String,
+  name: String,
   address: {
     street: String,
     postal_code: Number,
@@ -15,7 +15,7 @@ var collection = new mongoose.Schema({
     country: String
   },
   piece_ids: [String],
-  owner: { type: String, index: true }
+  owner_id: { type: String, index: true }
 });
 
 /* 
