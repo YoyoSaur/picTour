@@ -9,9 +9,9 @@ services:
       - "27017:27017"
 
   pictour:
-    build: .
+    build: ./backend
     restart: always
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - mongo
