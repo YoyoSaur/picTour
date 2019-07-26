@@ -37,7 +37,8 @@ module.exports = [
     method: 'put',
     path: '/owner',
     validation: {
-      body: put_owner_input,
+      query: get_owner_input,
+      body: create_owner_input,
       response: full_owner_output
     },
     middleware: [],

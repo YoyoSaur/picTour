@@ -36,7 +36,8 @@ module.exports = [
     method: 'put',
     path: '/collection',
     validation: {
-      body: put_collection_input,
+      query: get_collection_input,
+      body: create_collection_input,
       response: full_collection_output
     },
     middleware: [],

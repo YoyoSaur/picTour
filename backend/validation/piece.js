@@ -41,7 +41,7 @@ const create_piece_input = {
 }
 
 /**
- * Input for POST /piece
+ * Input for put /piece
  */
 const put_piece_input = {
   piece_id: joi.string().required(),

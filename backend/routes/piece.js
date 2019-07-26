@@ -39,7 +39,8 @@ module.exports = [
     method: 'put',
     path: '/piece',
     validation: {
-      body: put_piece_input,
+      query: get_piece_input,
+      body: create_piece_input,
       response: full_piece_output
     },
     middleware: [],
