@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@emotion/core": "^10.0.14",
+    "@emotion/styled": "^10.0.14",
     "axios": "^0.19.0",
+    "emotion": "^10.0.14",
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
@@ -13,7 +16,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start": "npm run build && next start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
