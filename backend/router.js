@@ -18,6 +18,10 @@ _.forEach(routes, (route) => {
   // otherwise, reject if a query is passed in
   if (validation.query) {
     router[method](path, async (req, res, next) => {
+      if(_.isEmpty(req.query)) {
+        logger.error('QUERY VALIDATION: empty query');
+        return res.status(500).json({ error_code: 999 });
+      }
       let check = joi.validate(req.query, validation.query)
       if (check.error) {
         logger.error('QUERY VALIDATION: ', check.error);
@@ -39,6 +43,10 @@ _.forEach(routes, (route) => {
   // otherwise, reject if a body is passed in
   if (validation.body) {
     router[method](path, async (req, res, next) => {
+      if(_.isEmpty(req.body)) {
+        logger.error('BODY VALIDATION: empty body');
+        return res.status(500).json({ error_code: 999 });
+      }
       let check = joi.validate(req.body, validation.body)
       if (check.error) {
         logger.error('BODY VALIDATION:  ', check.error);
