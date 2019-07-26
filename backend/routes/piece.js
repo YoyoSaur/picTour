@@ -45,8 +45,8 @@ module.exports = [
     },
     middleware: [],
     controller: async (req, res, next) => {
+      let { piece_id } = req.query
       let {
-        piece_id,
         piece_name,
         address,
         price,

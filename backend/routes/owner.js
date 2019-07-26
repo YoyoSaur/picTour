@@ -43,8 +43,8 @@ module.exports = [
     },
     middleware: [],
     controller: async (req, res, next) => {
+      let { owner_id } = req.query
       let {
-        owner_id,
         owner_first_name,
         owner_last_name,
         collection_ids,
@@ -76,7 +76,7 @@ module.exports = [
       let { owner_id } = req.query
       owner.findById(owner_id).then(
         (owner) => {
-          req.responseBody =owner 
+          req.responseBody = owner
           res.json(owner)
           next()
         },
